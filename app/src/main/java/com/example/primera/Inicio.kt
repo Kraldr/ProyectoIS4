@@ -43,7 +43,7 @@ class Inicio : AppCompatActivity() {
         title = "Email: $saveEmail"
 
         val recycler = findViewById<RecyclerView>(R.id.recyclerCard)
-
+        //prueba
 
         setupRecyclerView(recycler)
 
