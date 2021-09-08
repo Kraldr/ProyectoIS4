@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/amaur/.gradle/caches/transforms-3/00533c2231d48272584432a5de4bcff5/transformed/appcompat-1.3.1/res/layout/support_simple_spinner_dropdown_item.xml" value="0.2572463768115942" />
+        <entry key="..\:/Users/amaur/AndroidStudioProjects/Primera/app/src/main/res/layout/activity_inicio.xml" value="0.2803442028985507" />
+        <entry key="..\:/Users/amaur/AndroidStudioProjects/Primera/app/src/main/res/layout/activity_main.xml" value="0.14492753623188406" />
+        <entry key="..\:/Users/amaur/AndroidStudioProjects/Primera/app/src/main/res/layout/activity_menu_list.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/amaur/AndroidStudioProjects/Primera/app/src/main/res/layout/activity_registro.xml" value="0.2572463768115942" />
+        <entry key="..\:/Users/amaur/AndroidStudioProjects/Primera/app/src/main/res/layout/all_list.xml" value="0.11145833333333334" />
+        <entry key="..\:/Users/amaur/AndroidStudioProjects/Primera/app/src/main/res/menu/menu.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/amaur/Desktop/PracticaAndroid-main/app/src/main/res/drawable-v24/ic_buttom.xml" value="0.3828125" />
+        <entry key="..\:/Users/amaur/Desktop/PracticaAndroid-main/app/src/main/res/drawable-v24/ic_email.xml" value="0.3828125" />
+        <entry key="..\:/Users/amaur/Desktop/PracticaAndroid-main/app/src/main/res/drawable-v24/ic_field.xml" value="0.3828125" />
+        <entry key="..\:/Users/amaur/Desktop/PracticaAndroid-main/app/src/main/res/drawable-v24/ic_lock.xml" value="0.3828125" />
+        <entry key="..\:/Users/amaur/Desktop/PracticaAndroid-main/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/amaur/Desktop/PracticaAndroid-main/app/src/main/res/drawable/mipbstyle.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/amaur/Desktop/PracticaAndroid-main/app/src/main/res/layout/activity_main.xml" value="0.23777173913043478" />
+        <entry key="..\:/Users/amaur/Desktop/PracticaAndroid-main/app/src/main/res/layout/activity_menu_list.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/amaur/Desktop/PracticaAndroid-main/app/src/main/res/layout/activity_registrarse.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/amaur/Desktop/PracticaAndroid-main/app/src/main/res/layout/activity_registro.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/amaur/Desktop/PracticaAndroid-main/app/src/main/res/layout/all_list.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/amaur/Desktop/PracticaAndroid-main/app/src/main/res/layout/layout_progress_bar_with_text.xml" value="0.20520833333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

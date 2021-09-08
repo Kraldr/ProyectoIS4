@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Primera</string>
+
+    <string-array name="type">
+        <item>Seleccione una opción</item>
+        <item>Persona</item>
+        <item>Empresa</item>
+    </string-array>
+
+</resources>
