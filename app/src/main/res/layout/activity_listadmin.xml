@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="-160dp"
+            android:layout_marginTop="-130dp"
             android:layout_marginRight="24dp"
             android:autofillHints="Tipo de archivo"
             android:background="@drawable/ic_field"
@@ -87,6 +87,15 @@
             android:hint="Descripción"
             android:inputType="textPassword"
             android:padding="16dp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="24dp"
+            android:padding="16dp"
+            android:id="@+id/spinner"/>
 
 
 

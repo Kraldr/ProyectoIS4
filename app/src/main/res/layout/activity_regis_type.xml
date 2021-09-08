@@ -56,14 +56,6 @@
             android:inputType="text"
             android:padding="16dp" />
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="24dp"
-            android:padding="16dp"
-            android:id="@+id/spinner"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnRegistrar"
