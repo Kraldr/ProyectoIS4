@@ -5,12 +5,20 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Log.d
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,6 +26,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class Inicio : AppCompatActivity() {
+
+    private val database = Firebase.database
+    private lateinit var messagesListener: ValueEventListener
+    private val listCard:MutableList<cardStart> = ArrayList()
+    val myRef = database.getReference("cards")
+    //private lateinit var menuAll: Menu
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,47 +42,24 @@ class Inicio : AppCompatActivity() {
 
         title = "Email: $saveEmail"
 
-        val recycler = findViewById<RecyclerView>(R.id.recycler)
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val api = retrofit.create(ApiService::class.java)
-
-        api.fecthAllUsers().enqueue(object : Callback<List<allUsers>>{
-            override fun onResponse(call: Call<List<allUsers>>, response: Response<List<allUsers>>) {
-                datos (recycler, response.body()!!)
-            }
-
-            override fun onFailure(call: Call<List<allUsers>>?, t: Throwable?) {
-                d("x", "onFailure")
-            }
-
-        })
+        val recycler = findViewById<RecyclerView>(R.id.recyclerCard)
 
 
+        setupRecyclerView(recycler)
 
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        val intent = Intent(this, menuList::class.java).apply {
-
-        }
-        startActivity(intent)
-        finish()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
+    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuAll = menu
         menuInflater.inflate(R.menu.menu, menu)
+        val value :MenuItem = menu.findItem(R.id.itemAdmin)
+        value.setVisible(false)
+        Toast.makeText(this, "$value", Toast.LENGTH_LONG).show()
 
         return super.onCreateOptionsMenu(menu)
-    }
+    }*/
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item -> {
                 val intent = Intent(this, MainActivity::class.java).apply {
@@ -81,7 +72,32 @@ class Inicio : AppCompatActivity() {
 
         }
         return super.onOptionsItemSelected(item)
+    }*/
+
+    private fun setupRecyclerView(recyclerView: RecyclerView) {
+
+        messagesListener = object : ValueEventListener {
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                listCard.clear()
+                dataSnapshot.children.forEach { child ->
+                    val card: cardStart? =
+                        cardStart(child.child("ID").getValue<String>().toString(),
+                            child.child("Title").getValue<String>().toString(),
+                            child.child("Type").getValue<String>().toString())
+                    card?.let { listCard.add(it) }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("TAG", "messages:onCancelled: ${error.message}")
+            }
+        }
+        myRef.addValueEventListener(messagesListener)
+
     }
+
+
 
     private fun saveData (correo:String, online:Boolean, pass: String) {
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPreference", Context.MODE_PRIVATE)
@@ -98,6 +114,8 @@ class Inicio : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@Inicio)
             adapter = allAdapter(all)
         }
+
+        recycler.layoutManager = GridLayoutManager(this, 2)
     }
 
 }

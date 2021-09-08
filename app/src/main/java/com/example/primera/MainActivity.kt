@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.btnIngresar.setOnClickListener {
-            isNetworkAvailbale()
             if (isNetworkAvailbale()) {
                 val mEmail = binding.txtCorreo.text.toString()
                 val mPassword = binding.txtContrasena.text.toString()
