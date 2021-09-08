@@ -110,7 +110,7 @@ class Registrarse : AppCompatActivity() {
                     val users = allUsers(uniqueID, email,name,mType)
                     database.child(uniqueID).setValue(users).addOnSuccessListener {}
                     val intent = Intent(this, menuList::class.java)
-                    saveData(correo = email, online = true)
+                    saveData(correo = email, online = true, mType)
                     Toast.makeText(baseContext, "Registrado correctamente",
                         Toast.LENGTH_SHORT).show()
                     startActivity(intent)
@@ -125,11 +125,12 @@ class Registrarse : AppCompatActivity() {
             }
     }
 
-    private fun saveData (correo: kotlin.String, online:Boolean) {
+    private fun saveData (correo: kotlin.String, online:Boolean, regisType: kotlin.String) {
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPreference", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.apply {
             putString("correo", correo)
+            putString("type", regisType)
             putBoolean("online", online)
         }.apply()
     }

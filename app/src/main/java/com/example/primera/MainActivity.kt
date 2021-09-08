@@ -28,7 +28,7 @@ import java.net.URL
 class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var type: String
+    private var type: String = ""
     private val database = Firebase.database
     private lateinit var dbref : DatabaseReference
     private lateinit var binding: ActivityMainBinding
@@ -144,8 +144,8 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, menuList::class.java).apply {
 
                     }
-                    saveData (email, true)
                     Toast.makeText(this, "Sesión iniciada", Toast.LENGTH_LONG).show()
+                    saveData (email, true, type)
                     startActivity(intent)
                     dialog.hide()
                     finish()
@@ -175,11 +175,12 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun saveData (correo:String, online:Boolean) {
+    private fun saveData (correo:String, online:Boolean, type: String) {
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPreference", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.apply {
             putString("correo", correo)
+            putString("type", type)
             putBoolean("online", online)
         }.apply()
     }

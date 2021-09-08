@@ -77,6 +77,7 @@ class menuList : AppCompatActivity() {
     }
 
     private fun datos (recycler:RecyclerView, all: MutableList<cardStart>) {
+        Toast.makeText(this, type, Toast.LENGTH_LONG).show()
         recycler.apply {
             layoutManager = LinearLayoutManager(this@menuList)
             adapter = card_menu_lis_adapter(all, type)
@@ -104,7 +105,7 @@ class menuList : AppCompatActivity() {
             R.id.item -> {
                 val intent = Intent(this, MainActivity::class.java).apply {
                 }
-                saveData("",false,"")
+                saveData("sincorreo",false,"falso")
                 Toast.makeText(this, "Sesión Cerrada", Toast.LENGTH_LONG).show()
                 startActivity(intent)
                 finish()
