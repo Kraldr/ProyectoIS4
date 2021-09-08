@@ -136,10 +136,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun SignIn (email : String , password : String) {
+        setupRecyclerView(email)
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    setupRecyclerView(email)
                     Log.d("TAG", "signInWithEmail:success")
                     val intent = Intent(this, menuList::class.java).apply {
 
