@@ -31,7 +31,7 @@ class Inicio : AppCompatActivity() {
     private lateinit var messagesListener: ValueEventListener
     private val listCard:MutableList<cardStart> = ArrayList()
     val myRef = database.getReference("cards")
-    //private lateinit var menuAll: Menu
+    private lateinit var menuAll: Menu
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,17 +49,13 @@ class Inicio : AppCompatActivity() {
 
     }
 
-    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuAll = menu
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        val value :MenuItem = menu.findItem(R.id.itemAdmin)
-        value.setVisible(false)
-        Toast.makeText(this, "$value", Toast.LENGTH_LONG).show()
 
         return super.onCreateOptionsMenu(menu)
-    }*/
+    }
 
-    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item -> {
                 val intent = Intent(this, MainActivity::class.java).apply {
@@ -72,7 +68,7 @@ class Inicio : AppCompatActivity() {
 
         }
         return super.onOptionsItemSelected(item)
-    }*/
+    }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
 

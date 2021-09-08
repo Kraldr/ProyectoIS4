@@ -3,14 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/itemAdmin"
-        android:title="Build"
-        android:visible="true"
-        android:icon="@drawable/ic_baseline_build_24"
-        app:showAsAction="ifRoom"
-        />
-
-    <item
         android:id="@+id/item"
         android:title="Item"
         android:icon="@drawable/ic_baseline_exit_to_app_24"

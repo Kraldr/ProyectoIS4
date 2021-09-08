@@ -16,6 +16,8 @@ import com.example.primera.databinding.ActivityMainBinding
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.io.IOException
 import java.lang.Exception
@@ -26,6 +28,9 @@ import java.net.URL
 class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var type: String
+    private val database = Firebase.database
+    private lateinit var dbref : DatabaseReference
     private lateinit var binding: ActivityMainBinding
     private lateinit var dialog: Dialog
 
@@ -76,6 +81,45 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupRecyclerView(saveEmail: String) {
+
+        dbref = FirebaseDatabase.getInstance().getReference("users")
+        dbref.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if (snapshot.exists()){
+
+                    for (userSnapshot in snapshot.children){
+
+                        val user = userSnapshot.getValue(allUsers::class.java)
+                        if (user != null) {
+                            if (user.email == saveEmail) {
+                                type = user.type
+                                val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPreference", Context.MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.apply {
+                                    putString("type", type)
+                                }.apply()
+                            }
+                        }
+                    }
+
+
+
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+
+        })
+
+    }
+
     fun  isNetworkAvailbale():Boolean{
         val conManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val internetInfo =conManager.activeNetworkInfo
@@ -95,6 +139,7 @@ class MainActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    setupRecyclerView(email)
                     Log.d("TAG", "signInWithEmail:success")
                     val intent = Intent(this, menuList::class.java).apply {
 

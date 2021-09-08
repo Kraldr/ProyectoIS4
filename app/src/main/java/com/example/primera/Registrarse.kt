@@ -1,5 +1,6 @@
 package com.example.primera
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -17,9 +18,11 @@ import android.widget.Toast
 import com.example.primera.databinding.ActivityRegistrarseBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.lang.String
+import java.util.*
 import java.util.regex.Pattern
 
 class Registrarse : AppCompatActivity() {
@@ -27,7 +30,7 @@ class Registrarse : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityRegistrarseBinding
     private lateinit var type: kotlin.String
-    private val database = Firebase.database
+    private lateinit var dialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,6 +84,7 @@ class Registrarse : AppCompatActivity() {
                 Toast.makeText(baseContext, "Seleccione el tipo de cuenta",
                     Toast.LENGTH_SHORT).show()
             } else {
+                loadSesion()
                 createAccount(mEmail, mPassword, name, mType)
             }
 
@@ -88,22 +92,35 @@ class Registrarse : AppCompatActivity() {
 
     }
 
+    private fun loadSesion () {
+
+        dialog = Dialog(this)
+        dialog.setContentView(R.layout.layout_progress_bar_with_text)
+        dialog.show()
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
+    }
+
     private fun createAccount(email : kotlin.String, password : kotlin.String, name:kotlin.String, mType: kotlin.String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val myRef = database.getReference("users")
-                    val users = allUsers(email,name,mType)
-                    myRef.child(myRef.push().key.toString()).setValue(users)
+                    val database = FirebaseDatabase.getInstance().getReference("users")
+                    var uniqueID = UUID.randomUUID().toString()
+                    val users = allUsers(uniqueID, email,name,mType)
+                    database.child(uniqueID).setValue(users).addOnSuccessListener {}
                     val intent = Intent(this, menuList::class.java)
                     saveData(correo = email, online = true)
-                    Toast.makeText(baseContext, "Authentication.",
+                    Toast.makeText(baseContext, "Registrado correctamente",
                         Toast.LENGTH_SHORT).show()
                     startActivity(intent)
+                    dialog.hide()
+                    finish()
                 } else {
                     Log.w("TAG", "createUserWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
+                    dialog.hide()
                 }
             }
     }

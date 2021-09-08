@@ -13,6 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Primera">
         <activity
+            android:name=".listadmins"
+            android:exported="true" />
+        <activity
+            android:name=".regisType"
+            android:exported="true" />
+        <activity
+            android:name=".listadmin"
+            android:exported="true" />
+        <activity
             android:name=".Registrarse"
             android:exported="true" />
         <activity
