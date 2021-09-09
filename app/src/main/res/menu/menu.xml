@@ -4,14 +4,14 @@
 
     <item
         android:id="@+id/ids"
-        android:title="Cagarla"
+        android:title="Item"
         android:icon="@drawable/ic_baseline_build_24"
         app:showAsAction="ifRoom"
         />
 
     <item
         android:id="@+id/infoAdd"
-        android:title="Cagarla"
+        android:title="Item"
         android:icon="@drawable/ic_baseline_person_24"
         app:showAsAction="ifRoom"
         />

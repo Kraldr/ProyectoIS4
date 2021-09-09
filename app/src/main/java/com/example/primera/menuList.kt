@@ -30,6 +30,7 @@ class menuList : AppCompatActivity() {
     private lateinit var saveEmail: String
     private val listCard:MutableList<cardStart> = ArrayList()
     val myRef = database.getReference("cards")
+    private lateinit var item: MenuItem
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,6 +87,10 @@ class menuList : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
+        item = menu.findItem(R.id.ids)
+        if (type != "Organizador") {
+            item.isVisible = false
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
