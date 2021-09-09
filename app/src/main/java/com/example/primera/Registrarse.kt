@@ -108,7 +108,7 @@ class Registrarse : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val database = FirebaseDatabase.getInstance().getReference("users")
                     var uniqueID = UUID.randomUUID().toString()
-                    val users = allUsers(uniqueID, email,name,lastname,mType)
+                    val users = allUsers(uniqueID, email, "" ,name,lastname, "" ,mType)
                     database.child(uniqueID).setValue(users).addOnSuccessListener {}
                     val intent = Intent(this, menuList::class.java)
                     saveData(correo = email, online = true, mType)

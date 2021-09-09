@@ -37,7 +37,7 @@ class regisType : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         val item: MenuItem = menu.findItem(R.id.ids)
-        item.setVisible(false)
+        item.isVisible = false
         return super.onCreateOptionsMenu(menu)
     }
 

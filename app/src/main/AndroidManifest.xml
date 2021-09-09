@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Primera">
         <activity
+            android:name=".infoAdd"
+            android:exported="true" />
+        <activity
             android:name=".content"
             android:exported="true" />
         <activity

@@ -105,6 +105,11 @@ class menuList : AppCompatActivity() {
                 }
                 startActivity(intent)
             }
+            R.id.infoAdd -> {
+                val intent = Intent(this, infoAdd::class.java).apply {
+                }
+                startActivity(intent)
+            }
 
         }
         return super.onOptionsItemSelected(item)

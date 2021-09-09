@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registrarse">
+    tools:context=".infoAdd">
 
 
     <LinearLayout
@@ -24,9 +24,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="-100dp"
+            android:layout_marginTop="-70dp"
             android:layout_marginRight="24dp"
             android:autofillHints="Correo"
+            android:enabled="false"
             android:background="@drawable/ic_field"
             android:drawableStart="@drawable/ic_email"
             android:drawableLeft="@drawable/ic_email"
@@ -37,6 +38,25 @@
             android:padding="16dp" />
 
         <EditText
+            android:id="@+id/txtCC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="24dp"
+            android:enabled="false"
+            android:autofillHints="Nombres"
+            android:background="@drawable/ic_field"
+            android:drawableStart="@drawable/ic_baseline_featured_video_24"
+            android:drawableLeft="@drawable/ic_baseline_featured_video_24"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="Identificación"
+            android:inputType="text"
+            android:maxLength="16"
+            android:padding="16dp" />
+
+        <EditText
             android:id="@+id/txtNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,6 +64,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
             android:autofillHints="Nombres"
+            android:enabled="false"
             android:background="@drawable/ic_field"
             android:drawableStart="@drawable/ic_baseline_person_24black"
             android:drawableLeft="@drawable/ic_baseline_person_24black"
@@ -62,9 +83,10 @@
             android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
             android:autofillHints="Apellidos"
+            android:enabled="false"
             android:background="@drawable/ic_field"
             android:drawableStart="@drawable/ic_baseline_person_24black"
-            android:drawableLeft="@drawable/ic_lock"
+            android:drawableLeft="@drawable/ic_baseline_person_24black"
             android:drawablePadding="16dp"
             android:ems="10"
             android:hint="Apellidos"
@@ -73,60 +95,69 @@
             android:padding="16dp" />
 
         <EditText
-            android:id="@+id/txtPass"
+            android:id="@+id/txtCel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
-            android:autofillHints="Contraseña"
+            android:autofillHints="Celular"
             android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_lock"
-            android:drawableLeft="@drawable/ic_lock"
+            android:drawableStart="@drawable/ic_baseline_smartphone_24"
+            android:drawableLeft="@drawable/ic_baseline_smartphone_24"
             android:drawablePadding="16dp"
             android:ems="10"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
+            android:hint="Celular"
+            android:enabled="false"
+            android:inputType="text"
             android:maxLength="16"
             android:padding="16dp" />
 
         <EditText
-            android:id="@+id/txtRepeatPass"
+            android:id="@+id/txtTypeAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="24dp"
+            android:enabled="false"
             android:layout_marginRight="24dp"
-            android:autofillHints="Confirmar contraseña"
+            android:autofillHints="Tipo de cuenta"
             android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_lock"
-            android:drawableLeft="@drawable/ic_lock"
+            android:drawableStart="@drawable/ic_baseline_category_24"
+            android:drawableLeft="@drawable/ic_baseline_category_24"
             android:drawablePadding="16dp"
             android:ems="10"
-            android:hint="Confirmar contraseña"
-            android:inputType="textPassword"
+            android:hint="Tipo de cuenta"
+            android:inputType="text"
             android:maxLength="16"
             android:padding="16dp" />
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="24dp"
-            android:padding="16dp"
-            android:id="@+id/spinner"/>
+
+
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnRegistro"
+            android:id="@+id/btnGuardar"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/ic_buttom"
             android:paddingLeft="64dp"
             android:paddingRight="64dp"
-            android:text="Registrarme"
+            android:text="Guardar datos"
+            android:textColor="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:visibility="invisible"
+            android:enabled="false"
+            android:background="@drawable/ic_buttom"
+            android:paddingLeft="64dp"
+            android:paddingRight="64dp"
+            android:text="Cancelar"
             android:textColor="@color/white" />
 
     </LinearLayout>

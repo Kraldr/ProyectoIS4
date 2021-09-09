@@ -100,6 +100,7 @@ class MainActivity : AppCompatActivity() {
                                 val editor = sharedPreferences.edit()
                                 editor.apply {
                                     putString("type", type)
+                                    putString("key", user.key)
                                 }.apply()
                             }
                         }
