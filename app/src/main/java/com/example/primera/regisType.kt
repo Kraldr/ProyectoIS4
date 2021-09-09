@@ -1,14 +1,15 @@
 package com.example.primera
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 
 private lateinit var uniqueID: kotlin.String
 private lateinit var type: kotlin.String
+private lateinit var dialog: Dialog
 
 class regisType : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,35 +23,34 @@ class regisType : AppCompatActivity() {
 
         txtUID.setText(uniqueID)
 
-        val spinner = findViewById<Spinner>(R.id.spinner)
-        val list = resources.getStringArray(R.array.typeArchive)
-        val adaptador = ArrayAdapter(this, android.R.layout.simple_spinner_item, list)
-        spinner.adapter = adaptador
-
-        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                type = list[p2]
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-        }
-
         btnSubir.setOnClickListener {
+            loadSesion()
             crearType()
         }
+    }
+
+    private fun loadSesion () {
+        dialog = Dialog(this)
+        dialog.setContentView(R.layout.layout_progress_bar_with_crear)
+        dialog.show()
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
     }
 
     private fun crearType () {
         var txtUID = findViewById<EditText>(R.id.txtIDType)
         var txtTitle = findViewById<EditText>(R.id.txtTitle)
+        var txtUrl = findViewById<EditText>(R.id.txtURLI)
         var UID = txtUID.text.toString()
 
 
         val database = FirebaseDatabase.getInstance().getReference("ArchiType")
-        val cards = cardStart(UID, txtTitle.text.toString() , type)
-        database.child(UID).setValue(cards).addOnSuccessListener {}
+        val cards = cardStart(UID, txtTitle.text.toString(), txtUrl.text.toString())
+        database.child(UID).setValue(cards).addOnSuccessListener {
+            Toast.makeText(this, "Tipo de arcivo creado correctamente", Toast.LENGTH_LONG).show()
+            dialog.hide()
+            finish()
+        }
+
     }
 }

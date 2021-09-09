@@ -1,29 +1,43 @@
 package com.example.primera
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import android.widget.*
+import androidx.recyclerview.widget.RecyclerView
 import com.example.primera.databinding.ActivityListadminBinding
 import com.example.primera.databinding.ActivityRegistrarseBinding
-
+import com.google.firebase.database.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class listadmin : AppCompatActivity() {
+
+    private lateinit var dbref : DatabaseReference
+    private val listCard:MutableList<cardStart> = ArrayList()
+    private val listTitle:MutableList<String> = ArrayList()
+    private lateinit var dialog: Dialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listadmin)
 
         var btnCrearTipo = findViewById<Button>(R.id.btnCrearTipo)
+        var btnRegistro = findViewById<Button>(R.id.btnRegistro)
 
         val spinner = findViewById<Spinner>(R.id.spinner)
-        val list = resources.getStringArray(R.array.typeArchive)
-        val adaptador = ArrayAdapter(this, android.R.layout.simple_spinner_item, list)
-        spinner.adapter = adaptador
+        var type:String = ""
+
+        setupRecyclerView(spinner)
+
 
         spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                type = listTitle[p2]
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -36,5 +50,71 @@ class listadmin : AppCompatActivity() {
             val intent = Intent(this, regisType::class.java)
             startActivity(intent)
         }
+
+        btnRegistro.setOnClickListener {
+            loadSesion()
+            saveData(type)
+        }
     }
+
+    private fun loadSesion () {
+        dialog = Dialog(this)
+        dialog.setContentView(R.layout.layout_progress_bar_with_crear)
+        dialog.show()
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
+    }
+
+    private fun saveData (type: String) {
+        var txtTitle = findViewById<EditText>(R.id.txtTitle)
+        var txtIMG = findViewById<EditText>(R.id.txtIMG)
+        var txtDescrp = findViewById<EditText>(R.id.txtDescrips)
+        var UID = UUID.randomUUID().toString()
+
+
+        val database = FirebaseDatabase.getInstance().getReference("content")
+        val content = contentClass(UID, txtTitle.text.toString(), txtDescrp.text.toString(),type, txtIMG.text.toString())
+        database.child(UID).setValue(content).addOnSuccessListener {
+            Toast.makeText(this, "Contenido agregado correctamente", Toast.LENGTH_LONG).show()
+            dialog.hide()
+            finish()
+        }
+
+    }
+
+    private fun setupRecyclerView(spinner: Spinner) {
+        dbref = FirebaseDatabase.getInstance().getReference("ArchiType")
+        dbref.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                listCard.clear()
+
+                if (snapshot.exists()){
+
+                    for (cardSnapshot in snapshot.children){
+                        val card = cardSnapshot.getValue(cardStart::class.java)
+                        if (card != null) {
+                            listCard.add(card)
+                            listTitle.clear()
+                            listTitle.add("Seleccione una opción")
+                            for (i in listCard) {
+                                listTitle.add(i.title)
+                            }
+                            val adaptador = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, listTitle)
+                            spinner.adapter = adaptador
+                        }
+                    }
+
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+    }
+
 }

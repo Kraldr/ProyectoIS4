@@ -10,8 +10,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="25dp"
+        android:padding="10dp"
+        android:layout_gravity="center"
         android:id="@+id/listRecycler"/>
 
 </LinearLayout>

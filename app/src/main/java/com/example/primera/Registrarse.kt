@@ -95,7 +95,7 @@ class Registrarse : AppCompatActivity() {
     private fun loadSesion () {
 
         dialog = Dialog(this)
-        dialog.setContentView(R.layout.layout_progress_bar_with_text)
+        dialog.setContentView(R.layout.layout_progress_bar_with_register)
         dialog.show()
         dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(false)

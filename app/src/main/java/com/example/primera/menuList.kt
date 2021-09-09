@@ -28,6 +28,7 @@ class menuList : AppCompatActivity() {
     private lateinit var dbref : DatabaseReference
     private lateinit var messagesListener: ValueEventListener
     private lateinit var saveEmail: String
+    private val listCard:MutableList<cardStart> = ArrayList()
     val myRef = database.getReference("cards")
 
 
@@ -45,12 +46,11 @@ class menuList : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        dbref = FirebaseDatabase.getInstance().getReference("cards")
-        val listCard:MutableList<cardStart> = ArrayList()
-        listCard.clear()
+        dbref = FirebaseDatabase.getInstance().getReference("ArchiType")
         dbref.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
+                listCard.clear()
 
                 if (snapshot.exists()){
 
@@ -60,6 +60,9 @@ class menuList : AppCompatActivity() {
                             listCard.add(card)
                         }
                     }
+
+                    datos(recyclerView, listCard)
+
                 }
 
             }
@@ -69,34 +72,20 @@ class menuList : AppCompatActivity() {
             }
 
         })
-        var cards = cardStart("20", "Carta","Cos")
-        listCard.add(0, cards)
-        listCard.add(1, cards)
-        datos(recyclerView, listCard)
 
     }
 
     private fun datos (recycler:RecyclerView, all: MutableList<cardStart>) {
-        Toast.makeText(this, type, Toast.LENGTH_LONG).show()
         recycler.apply {
             layoutManager = LinearLayoutManager(this@menuList)
-            adapter = card_menu_lis_adapter(all, type)
+            adapter = card_menu_lis_adapter(all, type, applicationContext)
         }
 
-        recycler.layoutManager = GridLayoutManager(this, 2)
+        recycler.layoutManager = GridLayoutManager(this, 1)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        menuAll = menu
-
-        /* val value :MenuItem = menuAll.findItem()
-        if (value != null && type == "Persona" || value != null && type == "Empresa") {
-            value.isVisible = false
-        }else if (type == "Organizador") {
-            value.isVisible = true
-        }*/
-
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -109,6 +98,12 @@ class menuList : AppCompatActivity() {
                 Toast.makeText(this, "Sesión Cerrada", Toast.LENGTH_LONG).show()
                 startActivity(intent)
                 finish()
+            }
+
+            R.id.ids -> {
+                val intent = Intent(this, listadmin::class.java).apply {
+                }
+                startActivity(intent)
             }
 
         }

@@ -170,7 +170,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, menuList::class.java).apply {
 
         }
-        Toast.makeText(this, "Sesión iniciada", Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, "Sesión iniciada", Toast.LENGTH_LONG).show()
         startActivity(intent)
         finish()
     }

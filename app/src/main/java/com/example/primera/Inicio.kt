@@ -6,7 +6,6 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.util.Log.d
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -19,11 +18,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class Inicio : AppCompatActivity() {
 
@@ -79,8 +73,7 @@ class Inicio : AppCompatActivity() {
                 dataSnapshot.children.forEach { child ->
                     val card: cardStart? =
                         cardStart(child.child("ID").getValue<String>().toString(),
-                            child.child("Title").getValue<String>().toString(),
-                            child.child("Type").getValue<String>().toString())
+                            child.child("Title").getValue<String>().toString())
                     card?.let { listCard.add(it) }
                 }
             }

@@ -27,13 +27,13 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="-60dp"
             android:layout_marginRight="24dp"
-            android:autofillHints="Tipo de archivo"
+            android:autofillHints="ID"
             android:background="@drawable/ic_field"
             android:drawableStart="@drawable/ic_baseline_class_24"
             android:drawableLeft="@drawable/ic_baseline_class_24"
             android:drawablePadding="16dp"
             android:ems="10"
-            android:hint="Tipo de archivo"
+            android:hint="ID"
             android:inputType="textEmailAddress"
             android:padding="16dp" />
 
@@ -46,14 +46,31 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
-            android:autofillHints="Titulo"
+            android:autofillHints="Tipo de arichivo"
             android:background="@drawable/ic_field"
             android:drawableStart="@drawable/ic_baseline_subtitles_24"
             android:drawableLeft="@drawable/ic_baseline_subtitles_24"
             android:drawablePadding="16dp"
             android:ems="10"
-            android:hint="Titulo"
+            android:hint="Tipo de arichivo"
             android:inputType="text"
+            android:padding="16dp" />
+
+        <EditText
+            android:id="@+id/txtURLI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="24dp"
+            android:autofillHints="URL Imagen"
+            android:background="@drawable/ic_field"
+            android:drawableStart="@drawable/ic_baseline_image_24"
+            android:drawableLeft="@drawable/ic_baseline_image_24"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="URL Imagen"
+            android:inputType="textEmailAddress"
             android:padding="16dp" />
 
 
