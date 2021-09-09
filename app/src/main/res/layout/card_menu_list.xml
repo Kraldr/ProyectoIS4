@@ -5,6 +5,7 @@
     android:elevation="50dp"
     app:cardCornerRadius="10dp"
     android:layout_margin="10dp"
+    android:id="@+id/cardMenu"
     android:layout_marginTop="10dp"
     android:layout_gravity="center_horizontal"
     android:layout_width="300dp"

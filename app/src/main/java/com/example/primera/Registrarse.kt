@@ -65,6 +65,7 @@ class Registrarse : AppCompatActivity() {
 
             val mEmail = binding.txtEmail.text.toString()
             val name: kotlin.String = binding.txtNombre.text.toString()
+            val lastname: kotlin.String = binding.txtApellido.text.toString()
             val mPassword = binding.txtPass.text.toString()
             val mRepeatPassword = binding.txtRepeatPass.text.toString()
             val mType = type
@@ -85,7 +86,7 @@ class Registrarse : AppCompatActivity() {
                     Toast.LENGTH_SHORT).show()
             } else {
                 loadSesion()
-                createAccount(mEmail, mPassword, name, mType)
+                createAccount(mEmail, mPassword, name, lastname, mType)
             }
 
         }
@@ -101,13 +102,13 @@ class Registrarse : AppCompatActivity() {
         dialog.setCanceledOnTouchOutside(false)
     }
 
-    private fun createAccount(email : kotlin.String, password : kotlin.String, name:kotlin.String, mType: kotlin.String) {
+    private fun createAccount(email : kotlin.String, password : kotlin.String, name:kotlin.String,lastname:kotlin.String, mType: kotlin.String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val database = FirebaseDatabase.getInstance().getReference("users")
                     var uniqueID = UUID.randomUUID().toString()
-                    val users = allUsers(uniqueID, email,name,mType)
+                    val users = allUsers(uniqueID, email,name,lastname,mType)
                     database.child(uniqueID).setValue(users).addOnSuccessListener {}
                     val intent = Intent(this, menuList::class.java)
                     saveData(correo = email, online = true, mType)

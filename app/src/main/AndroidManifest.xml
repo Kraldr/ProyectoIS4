@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Primera">
         <activity
+            android:name=".content"
+            android:exported="true" />
+        <activity
             android:name=".listadmins"
             android:exported="true" />
         <activity

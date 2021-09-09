@@ -1,10 +1,13 @@
 package com.example.primera
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
@@ -55,6 +58,44 @@ class listadmin : AppCompatActivity() {
             loadSesion()
             saveData(type)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        val item: MenuItem = menu.findItem(R.id.ids)
+        item.setVisible(false)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item -> {
+                val intent = Intent(this, MainActivity::class.java).apply {
+                }
+                saveData("sincorreo",false,"falso")
+                Toast.makeText(this, "Sesión Cerrada", Toast.LENGTH_LONG).show()
+                startActivity(intent)
+                finish()
+            }
+
+            R.id.ids -> {
+                val intent = Intent(this, listadmin::class.java).apply {
+                }
+                startActivity(intent)
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun saveData (correo:String, online:Boolean, type: String) {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPreference", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.apply {
+            putString("correo", correo)
+            putString("type", type)
+            putBoolean("online", online)
+        }.apply()
     }
 
     private fun loadSesion () {
