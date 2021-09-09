@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:elevation="30dp"
     android:layout_margin="10dp"
+    android:id="@+id/imgCard"
     android:layout_marginTop="10dp"
     android:layout_height="wrap_content">
 
@@ -20,12 +21,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:id="@+id/img"
+                android:visibility="invisible"
                 android:background="#000"/>
 
             <VideoView
-                android:layout_width="match_parent"
                 android:id="@+id/videoV"
-                android:layout_height="250dp"/>
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
 
         </RelativeLayout>
 

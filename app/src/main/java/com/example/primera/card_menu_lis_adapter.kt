@@ -26,7 +26,7 @@ class card_menu_lis_adapter (private val card: MutableList<cardStart>, private v
 
         holder.cardActive.setOnClickListener {
             val intent = Intent( context, content::class.java).apply {
-                putExtra("Type", "Holita")
+                putExtra("Type", cards.title)
             }
             context.startActivity(intent)
         }
