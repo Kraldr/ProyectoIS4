@@ -3,7 +3,6 @@ package com.example.primera
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.provider.Settings.Global.putString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,11 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import android.widget.VideoView
+import java.util.*
+import android.media.MediaPlayer
+
+import android.media.MediaPlayer.OnPreparedListener
+
 
 
 
@@ -30,21 +33,19 @@ class content_lis_adapter (private val card: MutableList<contentClass>, private 
         holder.txtdescrp.text = cards.descrip
 
         if (cards.type == "Videos") {
-            holder.videV.isVisible = true
-            val path1 = cards.url
-            val uri: Uri = Uri.parse(path1)
-            holder.videV.setVideoURI(uri)
-            holder.videV.start()
+            holder.play.isVisible = true
         }else {
             holder.img.isVisible = true
             Glide.with(holder.itemView.context).load(cards.url).into(holder.img);
         }
 
 
-
-
         holder.cardActive.setOnClickListener {
-
+            val intent = Intent( context, contentRepro::class.java).apply {
+                putExtra("url", cards.url)
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
         }
 
     }
@@ -52,7 +53,7 @@ class content_lis_adapter (private val card: MutableList<contentClass>, private 
     override fun getItemCount() = card.size
 
     class ViewHolder (itemView: View): RecyclerView.ViewHolder(itemView) {
-        val videV: VideoView = itemView.findViewById(R.id.videoV)
+        val play: ImageView = itemView.findViewById(R.id.play)
         val cardActive: CardView = itemView.findViewById(R.id.imgCard)
         val img: ImageView = itemView.findViewById(R.id.img)
         val txtTitulo: TextView = itemView.findViewById(R.id.txtTitulo)

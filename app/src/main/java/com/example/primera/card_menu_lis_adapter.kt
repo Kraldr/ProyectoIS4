@@ -28,6 +28,7 @@ class card_menu_lis_adapter (private val card: MutableList<cardStart>, private v
             val intent = Intent( context, content::class.java).apply {
                 putExtra("Type", cards.title)
             }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }
 

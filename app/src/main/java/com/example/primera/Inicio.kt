@@ -98,13 +98,5 @@ class Inicio : AppCompatActivity() {
         }.apply()
     }
 
-    private fun datos (recycler:RecyclerView, all: List<allUsers>) {
-        recycler.apply {
-            layoutManager = LinearLayoutManager(this@Inicio)
-            adapter = allAdapter(all)
-        }
-
-        recycler.layoutManager = GridLayoutManager(this, 2)
-    }
 
 }

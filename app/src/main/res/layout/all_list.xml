@@ -17,6 +17,15 @@
             android:layout_width="match_parent"
             android:layout_height="250dp">
 
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:id="@+id/play"
+                android:layout_margin="90dp"
+                android:src="@drawable/play"
+                android:visibility="invisible" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
@@ -24,11 +33,6 @@
                 android:visibility="invisible"
                 android:background="#000"/>
 
-            <VideoView
-                android:id="@+id/videoV"
-                android:visibility="invisible"
-                android:layout_width="match_parent"
-                android:layout_height="250dp" />
 
         </RelativeLayout>
 
