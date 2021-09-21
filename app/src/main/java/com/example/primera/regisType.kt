@@ -95,5 +95,6 @@ class regisType : AppCompatActivity() {
             finish()
         }
 
+
     }
 }

@@ -1,21 +1,14 @@
 package com.example.primera
 
-import android.media.MediaPlayer
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.example.primera.databinding.ActivityContentReproBinding
-import com.google.android.exoplayer2.ui.PlayerView
-import android.widget.RelativeLayout
-
 import android.content.pm.ActivityInfo
-
-import android.R
+import android.net.Uri
+import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
-
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-
-
+import com.example.primera.databinding.ActivityContentReproBinding
 
 
 class contentRepro : AppCompatActivity() {
@@ -35,21 +28,51 @@ class contentRepro : AppCompatActivity() {
 
         binding.exoPlayerView.prepare(Uri.parse(meesage))
 
+        val playerView = binding.exoPlayerView
 
-    }
+        val fullscreenButton = playerView.findViewById<ImageView>(R.id.exo_fullscreen_icon)
 
-    override fun onPause() {
-        super.onPause()
-        binding.exoPlayerView.onPause()
-    }
+        var fullscreen = false
 
-    override fun onResume() {
-        super.onResume()
-        binding.exoPlayerView.onResume()
-    }
+        fullscreenButton.setOnClickListener {
+            if (fullscreen) {
+                fullscreenButton.setImageDrawable(ContextCompat.getDrawable(
+                    applicationContext,
+                        R.drawable.ic_baseline_fullscreen_24
+                    )
+                )
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+                if (supportActionBar != null) {
+                    supportActionBar!!.show()
+                }
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                val params = playerView.layoutParams as LinearLayout.LayoutParams
+                params.width = ViewGroup.LayoutParams.MATCH_PARENT
+                params.height = (200 * applicationContext.resources.displayMetrics.density).toInt()
+                playerView.layoutParams = params
+                fullscreen = false
+            } else {
+                fullscreenButton.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.ic_baseline_fullscreen_exit_24
+                    )
+                )
+                window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
+                if (supportActionBar != null) {
+                    supportActionBar!!.hide()
+                }
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                val params = playerView.layoutParams as LinearLayout.LayoutParams
+                params.width = ViewGroup.LayoutParams.MATCH_PARENT
+                params.height = ViewGroup.LayoutParams.MATCH_PARENT
+                playerView.layoutParams = params
+                fullscreen = true
+            }
+        }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.exoPlayerView.onDestroy()
+
     }
 }

@@ -29,6 +29,7 @@ class menuList : AppCompatActivity() {
     private lateinit var messagesListener: ValueEventListener
     private lateinit var saveEmail: String
     private val listCard:MutableList<cardStart> = ArrayList()
+    private val listBool:MutableList<boolNotify> = ArrayList()
     val myRef = database.getReference("cards")
     private lateinit var item: MenuItem
 
@@ -37,12 +38,20 @@ class menuList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_list)
 
+        supportActionBar!!.elevation = 0F;
+
+
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPreference", Context.MODE_PRIVATE)
         saveEmail = sharedPreferences.getString("correo", null).toString()
         type = sharedPreferences.getString("type", null).toString()
         title = "Email: $saveEmail"
         val recycler = findViewById<RecyclerView>(R.id.listRecycler)
         setupRecyclerView(recycler)
+
+        val myService = Intent(this@menuList, MyService::class.java)
+        myService.putExtra("inputExtra", "Cosa");
+        startService(myService)
+        setupBoolNotify ()
 
     }
 
@@ -102,6 +111,8 @@ class menuList : AppCompatActivity() {
                 saveData("sincorreo",false,"falso")
                 Toast.makeText(this, "Sesión Cerrada", Toast.LENGTH_LONG).show()
                 startActivity(intent)
+                val myService = Intent(this@menuList, MyService::class.java)
+                stopService(myService)
                 finish()
             }
 
@@ -128,6 +139,39 @@ class menuList : AppCompatActivity() {
             putString("type", type)
             putBoolean("online", online)
         }.apply()
+    }
+
+    private fun setupBoolNotify () {
+        dbref = FirebaseDatabase.getInstance().getReference("boolNotify")
+        dbref.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                listBool.clear()
+
+                if (snapshot.exists()){
+
+                    for (boolNotifySnapshot in snapshot.children){
+                        val boolNotifys = boolNotifySnapshot.getValue(boolNotify::class.java)
+                        if (boolNotifys != null) {
+                            listBool.add(boolNotifys)
+                        }
+                    }
+
+                    if (listBool[0].boolNoti) {
+                        val myService = Intent(this@menuList, MyService::class.java)
+                        startService(myService)
+                    }
+
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
     }
 
 

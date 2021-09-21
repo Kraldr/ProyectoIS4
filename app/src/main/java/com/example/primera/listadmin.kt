@@ -1,18 +1,22 @@
 package com.example.primera
 
-import android.app.Dialog
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.primera.databinding.ActivityListadminBinding
 import com.example.primera.databinding.ActivityRegistrarseBinding
+import com.google.android.exoplayer2.offline.DownloadService.startForeground
 import com.google.firebase.database.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -24,6 +28,8 @@ class listadmin : AppCompatActivity() {
     private val listCard:MutableList<cardStart> = ArrayList()
     private val listTitle:MutableList<String> = ArrayList()
     private lateinit var dialog: Dialog
+    private val CHANNEL_ID = "channelTest"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +55,11 @@ class listadmin : AppCompatActivity() {
 
         }
 
+
         btnCrearTipo.setOnClickListener {
             val intent = Intent(this, regisType::class.java)
             startActivity(intent)
+
         }
 
         btnRegistro.setOnClickListener {
@@ -60,10 +68,28 @@ class listadmin : AppCompatActivity() {
         }
     }
 
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name: CharSequence = "chaneltest"
+            val description = "sssss"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID, name, importance)
+            channel.description = description
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            val notificationManager = getSystemService(
+                NotificationManager::class.java
+            )
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         val item: MenuItem = menu.findItem(R.id.ids)
-        item.setVisible(false)
+        item.isVisible = false
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -118,11 +144,16 @@ class listadmin : AppCompatActivity() {
         var txtDescrp = findViewById<EditText>(R.id.txtDescrips)
         var UID = UUID.randomUUID().toString()
 
+        var number = 1
 
         val database = FirebaseDatabase.getInstance().getReference("content")
+        val databaseBool = FirebaseDatabase.getInstance().getReference("boolNotify")
         val content = contentClass(UID, txtTitle.text.toString(), txtDescrp.text.toString(),type, txtIMG.text.toString())
+        val contentBool = boolNotify(number.toString(), true, type, txtTitle.text.toString())
         database.child(UID).setValue(content).addOnSuccessListener {
             Toast.makeText(this, "Contenido agregado correctamente", Toast.LENGTH_LONG).show()
+            databaseBool.child(number.toString()).setValue(contentBool).addOnSuccessListener {
+            }
             dialog.hide()
             finish()
         }

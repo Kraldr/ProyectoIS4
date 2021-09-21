@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var dbref : DatabaseReference
     private lateinit var binding: ActivityMainBinding
     private lateinit var dialog: Dialog
+    private var meesage:String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

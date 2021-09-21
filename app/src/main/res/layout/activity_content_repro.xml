@@ -8,9 +8,10 @@
     tools:context=".contentRepro">
 
     <com.example.primera.ExoPlayerView
+        android:background="#000"
         android:id="@+id/exoPlayerView"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="230dp" />
 
 
 
