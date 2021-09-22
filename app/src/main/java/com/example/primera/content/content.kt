@@ -1,6 +1,5 @@
-package com.example.primera
+package com.example.primera.content
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
@@ -9,13 +8,10 @@ import android.os.Bundle
 import android.view.ContextMenu
 import android.view.MenuInflater
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.primera.R
 import com.google.firebase.database.*
 
 private lateinit var dbref : DatabaseReference

@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
         android:allowBackup="true"
@@ -16,36 +17,38 @@
         android:theme="@style/Theme.Primera"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".editContent"
-
+            android:name=".content.contentIMG"
             android:exported="true" />
         <activity
-            android:name=".contentRepro"
+            android:name=".menu.editContent"
+            android:exported="true" />
+        <activity
+            android:name=".content.contentRepro"
             android:configChanges="orientation|screenSize|layoutDirection"
             android:exported="true" />
         <activity
-            android:name=".infoAdd"
+            android:name=".menu.infoAdd"
             android:exported="true" />
         <activity
-            android:name=".content"
+            android:name=".content.content"
             android:exported="true" />
         <activity
-            android:name=".regisType"
+            android:name=".menu.regisType"
             android:exported="true" />
         <activity
-            android:name=".listadmin"
+            android:name=".menu.listadmin"
             android:exported="true" />
         <activity
-            android:name=".Registrarse"
+            android:name=".menu.Registrarse"
             android:exported="true" />
         <activity
-            android:name=".menuList"
+            android:name=".menu.menuList"
             android:exported="true" />
         <activity
-            android:name=".Inicio"
+            android:name=".menu.Inicio"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".menu.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,8 +56,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".MyService" />
 
+        <service android:name=".menu.MyService" />
     </application>
 
 </manifest>

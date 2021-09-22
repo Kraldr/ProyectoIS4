@@ -1,4 +1,4 @@
-package com.example.primera
+package com.example.primera.menu
 
 import android.app.Dialog
 import android.content.Context
@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
+import com.example.primera.R
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 

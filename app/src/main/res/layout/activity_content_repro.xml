@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".contentRepro">
+    tools:context=".content.contentRepro">
 
-    <com.example.primera.ExoPlayerView
+    <com.example.primera.content.ExoPlayerView
         android:background="#000"
         android:id="@+id/exoPlayerView"
         android:layout_width="match_parent"

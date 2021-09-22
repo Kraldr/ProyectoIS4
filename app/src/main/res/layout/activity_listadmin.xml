@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".listadmin">
+    tools:context=".menu.listadmin">
 
 
     <LinearLayout
@@ -19,66 +19,100 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.078">
 
-        <EditText
-            android:id="@+id/txtTitle"
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="-130dp"
             android:layout_marginRight="24dp"
-            android:autofillHints="Titulo"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_baseline_class_24"
-            android:drawableLeft="@drawable/ic_baseline_class_24"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Titulo"
-            android:inputType="textEmailAddress"
-            android:padding="16dp" />
+            app:boxStrokeColor="#000"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconDrawable="@drawable/ic_baseline_class_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Titulo"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-        <EditText
-            android:id="@+id/txtIMG"
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
-            android:autofillHints="URL Image"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_baseline_image_24"
-            android:drawableLeft="@drawable/ic_baseline_image_24"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="URL Image"
-            android:padding="16dp" />
+            app:boxStrokeColor="#000"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconDrawable="@drawable/ic_baseline_image_24">
 
-        <EditText
-            android:id="@+id/txtDescrips"
-            android:layout_width="match_parent"
-            android:layout_height="89dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="24dp"
-            android:autofillHints="Descripción"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_baseline_subtitles_24"
-            android:drawableLeft="@drawable/ic_baseline_subtitles_24"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Descripción"
-            android:inputType="textMultiLine"
-            android:padding="16dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtIMG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="URL"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-        <Spinner
-            android:id="@+id/spinner"
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            app:boxStrokeColor="#000"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconDrawable="@drawable/ic_baseline_subtitles_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtDescrips"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="Descripción"
+                android:inputType="textMultiLine" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="24dp"
+            app:helperTextEnabled="true"
+            app:helperText="New text"
+            app:startIconDrawable="@drawable/ic_baseline_menu_24"
+            app:startIconContentDescription="Info Icon"
+            app:errorEnabled="true"
             android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
-            android:padding="16dp" />
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/typeArchive"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:hint="Seleccione una opción"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnRegistro"
@@ -93,10 +127,10 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCrearTipo"
-            android:layout_marginBottom="-50dp"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="32dp"
+            android:layout_marginBottom="-50dp"
             android:background="@drawable/ic_buttom"
             android:paddingLeft="64dp"
             android:paddingRight="64dp"

@@ -1,4 +1,4 @@
-package com.example.primera
+package com.example.primera.menu
 
 import android.app.Dialog
 import android.content.Context
@@ -8,20 +8,19 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.util.Log.d
 import android.util.Patterns
 import android.view.View
 import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import com.example.primera.R
 import com.example.primera.databinding.ActivityRegistrarseBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.lang.String
 import java.util.*
 import java.util.regex.Pattern
 
@@ -29,7 +28,6 @@ class Registrarse : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityRegistrarseBinding
-    private lateinit var type: kotlin.String
     private lateinit var dialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,21 +42,11 @@ class Registrarse : AppCompatActivity() {
         window.statusBarColor = Color.WHITE
 
 
-        val spinner = binding.spinner
         val list = resources.getStringArray(R.array.type)
-        val adaptador = ArrayAdapter(this, android.R.layout.simple_spinner_item, list)
-        spinner.adapter = adaptador
 
-        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                type = list[p2]
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-        }
+        val adapters = ArrayAdapter(applicationContext, R.layout.list_item, list)
+        val text = findViewById<AutoCompleteTextView>(R.id.typeAccount)
+        text.setAdapter(adapters)
 
 
         binding.btnRegistro.setOnClickListener {
@@ -68,7 +56,7 @@ class Registrarse : AppCompatActivity() {
             val lastname: kotlin.String = binding.txtApellido.text.toString()
             val mPassword = binding.txtPass.text.toString()
             val mRepeatPassword = binding.txtRepeatPass.text.toString()
-            val mType = type
+            val type = findViewById<AutoCompleteTextView>(R.id.typeAccount)
 
             val passwordRegex = Pattern.compile("^" +
                     "(?=.*[-@#$%^&+/=])" +     // Al menos 1 carácter especial
@@ -78,15 +66,18 @@ class Registrarse : AppCompatActivity() {
             if(mEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(mEmail).matches()) {
                 Toast.makeText(baseContext, "Ingrese un email valido.",
                     Toast.LENGTH_SHORT).show()
+                binding.txtEmail.error = "Verificar correo"
             } else if (mPassword != mRepeatPassword) {
                 Toast.makeText(baseContext, "Confirma la contraseña.",
                     Toast.LENGTH_SHORT).show()
-            }else if (type == "Seleccione una opción") {
+                binding.txtPass.error = "Verificar contraseña"
+            }else if (type.text.toString() == "") {
                 Toast.makeText(baseContext, "Seleccione el tipo de cuenta",
                     Toast.LENGTH_SHORT).show()
+                binding.typeAccount.error = "Verificar tipo de cuenta"
             } else {
                 loadSesion()
-                createAccount(mEmail, mPassword, name, lastname, mType)
+                createAccount(mEmail, mPassword, name, lastname, type.text.toString())
             }
 
         }

@@ -1,16 +1,16 @@
-package com.example.primera
+package com.example.primera.menu
 
 import android.content.Context
 import android.content.Intent
-import android.provider.Settings.Global.putString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.primera.R
+import com.example.primera.content.content
 
 class card_menu_lis_adapter (private val card: MutableList<cardStart>, private val types: String, private val context: Context) : RecyclerView.Adapter<card_menu_lis_adapter.ViewHolder> () {
 

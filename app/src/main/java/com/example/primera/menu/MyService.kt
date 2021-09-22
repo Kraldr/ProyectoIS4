@@ -1,4 +1,4 @@
-package com.example.primera
+package com.example.primera.menu
 
 import android.app.*
 import android.content.Context
@@ -8,8 +8,7 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import android.widget.Toast
-import androidx.core.app.NotificationCompat
-import com.google.android.gms.tasks.OnSuccessListener
+import com.example.primera.R
 import com.google.firebase.database.*
 import java.util.ArrayList
 

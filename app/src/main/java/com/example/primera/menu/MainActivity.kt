@@ -1,4 +1,4 @@
-package com.example.primera
+package com.example.primera.menu
 
 import android.app.Dialog
 import android.content.Context
@@ -9,9 +9,9 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View.Z
 import android.view.WindowManager
 import android.widget.Toast
+import com.example.primera.R
 import com.example.primera.databinding.ActivityMainBinding
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
@@ -19,11 +19,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.io.IOException
-import java.lang.Exception
-import java.net.HttpURLConnection
-import java.net.MalformedURLException
-import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.primera
+package com.example.primera.menu
 
 import android.app.Dialog
 import android.content.Context
@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import com.example.primera.R
 import com.google.firebase.database.*
 
 class infoAdd : AppCompatActivity() {

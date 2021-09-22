@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registrarse">
+    tools:context=".menu.Registrarse">
 
 
     <LinearLayout
@@ -13,109 +13,152 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
+        android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.078">
 
-        <EditText
-            android:id="@+id/txtEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="-100dp"
-            android:layout_marginRight="24dp"
-            android:autofillHints="Correo"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_email"
-            android:drawableLeft="@drawable/ic_email"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Correo"
-            android:inputType="textEmailAddress"
-            android:padding="16dp" />
 
-        <EditText
-            android:id="@+id/txtNombre"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="24dp"
-            android:autofillHints="Nombres"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_baseline_person_24black"
-            android:drawableLeft="@drawable/ic_baseline_person_24black"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Nombres"
-            android:inputType="text"
-            android:maxLength="16"
-            android:padding="16dp" />
+            android:layout_marginTop="-50dp"
+            app:boxStrokeColor="#000"
+            app:errorEnabled="true"
+            app:helperText="Este campo es obligatorio*"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconContentDescription="Info Icon"
+            app:startIconDrawable="@drawable/ic_email">
 
-        <EditText
-            android:id="@+id/txtApellido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="24dp"
-            android:autofillHints="Apellidos"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_baseline_person_24black"
-            android:drawableLeft="@drawable/ic_lock"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Apellidos"
-            android:inputType="text"
-            android:maxLength="16"
-            android:padding="16dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Correo"
+                android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/txtPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="24dp"
-            android:autofillHints="Contraseña"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_lock"
-            android:drawableLeft="@drawable/ic_lock"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:maxLength="16"
-            android:padding="16dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/txtRepeatPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="24dp"
-            android:autofillHints="Confirmar contraseña"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_lock"
-            android:drawableLeft="@drawable/ic_lock"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Confirmar contraseña"
-            android:inputType="textPassword"
-            android:maxLength="16"
-            android:padding="16dp" />
 
-        <Spinner
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
+            android:layout_marginTop="15dp"
+            app:boxStrokeColor="#000"
+            app:errorEnabled="true"
+            app:helperText="Este campo es obligatorio*"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconContentDescription="Info Icon"
+            app:startIconDrawable="@drawable/ic_baseline_person_24black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombres"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:boxStrokeColor="#000"
+            app:errorEnabled="true"
+            app:helperText="Este campo es obligatorio*"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconContentDescription="Info Icon"
+            app:startIconDrawable="@drawable/ic_baseline_person_24black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtApellido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Apellidos"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:boxStrokeColor="#000"
+            app:endIconMode="password_toggle"
+            app:errorEnabled="true"
+            app:helperText="Este campo es obligatorio*"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconContentDescription="Info Icon"
+            app:startIconDrawable="@drawable/ic_lock">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirmar contraseña"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:boxStrokeColor="#000"
+            app:endIconMode="password_toggle"
+            app:errorEnabled="true"
+            app:helperText="Este campo es obligatorio*"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconContentDescription="Info Icon"
+            app:startIconDrawable="@drawable/ic_lock">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtRepeatPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirmar contraseña"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginRight="24dp"
-            android:padding="16dp"
-            android:id="@+id/spinner"/>
+            app:boxStrokeColor="#000"
+            app:errorEnabled="true"
+            app:helperText="Este campo es obligatorio*"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconContentDescription="Info Icon"
+            app:startIconDrawable="@drawable/ic_baseline_menu_24">
+
+            <AutoCompleteTextView
+                android:id="@+id/typeAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Seleccione una opción"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <androidx.appcompat.widget.AppCompatButton

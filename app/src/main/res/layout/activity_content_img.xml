@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".content.content">
+    android:layout_height="match_parent"
+    tools:context=".content.contentIMG">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ImageView
+        android:background="#000"
+        android:id="@+id/imgAll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/recyclerContent"/>
+        android:layout_height="230dp" />
 
 </LinearLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".menu.MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -46,44 +46,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-        <EditText
-            android:id="@+id/txtCorreo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:autofillHints="Correo"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_email"
-            android:drawableLeft="@drawable/ic_email"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Correo"
-            android:inputType="textEmailAddress"
-            android:padding="16dp" />
 
-        <EditText
-            android:id="@+id/txtContrasena"
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            app:helperTextEnabled="true"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
-            android:autofillHints="Contraseña"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_lock"
-            android:drawableLeft="@drawable/ic_lock"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:padding="16dp" />
+            app:startIconDrawable="@drawable/ic_email"
+            app:errorEnabled="true"
+            app:boxStrokeColor="#000"
+            app:hintTextColor="#000"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtCorreo"
+                android:layout_width="match_parent"
+                android:hint="Correo"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            app:helperTextEnabled="true"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="-4dp"
+            android:layout_marginRight="24dp"
+            app:startIconDrawable="@drawable/ic_lock"
+            app:errorEnabled="true"
+            app:endIconMode="password_toggle"
+            app:boxStrokeColor="#000"
+            app:hintTextColor="#000"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtContrasena"
+                android:layout_width="match_parent"
+                android:hint="Contraseña"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/recoveryAccountTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="-4dp"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="24dp"
             android:textSize="16sp"

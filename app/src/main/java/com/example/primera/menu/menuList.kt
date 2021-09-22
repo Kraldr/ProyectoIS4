@@ -1,23 +1,34 @@
-package com.example.primera
+package com.example.primera.menu
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.cardview.widget.CardView
+import android.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.OrientationHelper.*
 import androidx.recyclerview.widget.RecyclerView
+import com.example.primera.R
+import com.example.primera.content.contentClass
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import com.example.primera.cardStart
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+const val TOPIC = "/topics/myTopic"
 
 class menuList : AppCompatActivity() {
 
@@ -29,6 +40,7 @@ class menuList : AppCompatActivity() {
     private lateinit var messagesListener: ValueEventListener
     private lateinit var saveEmail: String
     private val listCard:MutableList<cardStart> = ArrayList()
+    private val listCardTop:MutableList<contentClass> = ArrayList()
     private val listBool:MutableList<boolNotify> = ArrayList()
     val myRef = database.getReference("cards")
     private lateinit var item: MenuItem
@@ -38,15 +50,22 @@ class menuList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_list)
 
-        supportActionBar!!.elevation = 0F;
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.my_toolbar)
+        setSupportActionBar(toolbar)
 
+        supportActionBar!!.elevation = 0F;
+        toolbar.setBackgroundColor(Color.parseColor("#ffffff"))
+
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
 
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPreference", Context.MODE_PRIVATE)
         saveEmail = sharedPreferences.getString("correo", null).toString()
         type = sharedPreferences.getString("type", null).toString()
         title = "Email: $saveEmail"
         val recycler = findViewById<RecyclerView>(R.id.listRecycler)
+        val recyclerTop = findViewById<RecyclerView>(R.id.listRecyclerTop)
         setupRecyclerView(recycler)
+        setupRecyclerViewTop(recyclerTop)
 
         val myService = Intent(this@menuList, MyService::class.java)
         myService.putExtra("inputExtra", "Cosa");
@@ -54,6 +73,7 @@ class menuList : AppCompatActivity() {
         setupBoolNotify ()
 
     }
+
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         dbref = FirebaseDatabase.getInstance().getReference("ArchiType")
@@ -85,13 +105,53 @@ class menuList : AppCompatActivity() {
 
     }
 
+    private fun setupRecyclerViewTop(recyclerView: RecyclerView) {
+        dbref = FirebaseDatabase.getInstance().getReference("content")
+        dbref.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                listCardTop.clear()
+
+                if (snapshot.exists()){
+
+                    for (cardSnapshot in snapshot.children){
+                        val content = cardSnapshot.getValue(contentClass::class.java)
+                        if (content != null) {
+                            listCardTop.add(content)
+                        }
+                    }
+
+                    datosTop(recyclerView, listCardTop)
+
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+    }
+
+    private fun datosTop (recycler:RecyclerView, all: MutableList<contentClass>) {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPreference", Context.MODE_PRIVATE)
+        val types = sharedPreferences.getString("type", null).toString()
+        recycler.apply {
+            layoutManager = LinearLayoutManager(this@menuList)
+            adapter = card_top_adapter(all, this@menuList, types)
+        }
+
+    }
+
     private fun datos (recycler:RecyclerView, all: MutableList<cardStart>) {
         recycler.apply {
             layoutManager = LinearLayoutManager(this@menuList)
             adapter = card_menu_lis_adapter(all, type, applicationContext)
         }
 
-        recycler.layoutManager = GridLayoutManager(this, 1)
+        recycler.layoutManager = LinearLayoutManager(this@menuList, RecyclerView.HORIZONTAL,false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -1,14 +1,13 @@
-package com.example.primera
+package com.example.primera.menu
 
 import android.app.Dialog
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import androidx.recyclerview.widget.RecyclerView
+import com.example.primera.R
+import com.example.primera.content.contentClass
 import com.google.firebase.database.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 private lateinit var dbref : DatabaseReference
@@ -29,28 +28,16 @@ class editContent : AppCompatActivity() {
         meesage = intent.getStringExtra("key").toString()
 
 
-        val spinner = findViewById<Spinner>(R.id.spinner)
         var typex:String = ""
 
-        setupRecyclerView(spinner)
+        setupRecyclerView()
         setupContent()
 
-
-        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                typex = listTitle[p2]
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-        }
 
 
         btnActualizar.setOnClickListener {
             loadSesion()
-            if (typex != "Seleccione una opción" && typex != type) {
+            if (typex != "" && typex != type) {
                 saveData(typex)
             }else {
                 saveData(type)
@@ -130,7 +117,7 @@ class editContent : AppCompatActivity() {
         }
     }
 
-    private fun setupRecyclerView(spinner: Spinner) {
+    private fun setupRecyclerView() {
         dbref = FirebaseDatabase.getInstance().getReference("ArchiType")
         dbref.addValueEventListener(object : ValueEventListener {
 
@@ -144,12 +131,12 @@ class editContent : AppCompatActivity() {
                         if (card != null) {
                             listCard.add(card)
                             listTitle.clear()
-                            listTitle.add("Seleccione una opción")
                             for (i in listCard) {
                                 listTitle.add(i.title)
                             }
-                            val adaptador = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, listTitle)
-                            spinner.adapter = adaptador
+                            val adapters = ArrayAdapter(applicationContext, R.layout.list_item, listTitle)
+                            val text = findViewById<AutoCompleteTextView>(R.id.typeArchive)
+                            text.setAdapter(adapters)
                         }
                     }
 

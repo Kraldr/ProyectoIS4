@@ -1,4 +1,4 @@
-package com.example.primera
+package com.example.primera.content
 
 import android.content.pm.ActivityInfo
 import android.net.Uri
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.primera.R
 import com.example.primera.databinding.ActivityContentReproBinding
 
 
@@ -38,7 +39,7 @@ class contentRepro : AppCompatActivity() {
             if (fullscreen) {
                 fullscreenButton.setImageDrawable(ContextCompat.getDrawable(
                     applicationContext,
-                        R.drawable.ic_baseline_fullscreen_24
+                    R.drawable.ic_baseline_fullscreen_24
                     )
                 )
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
@@ -70,9 +71,11 @@ class contentRepro : AppCompatActivity() {
                 params.height = ViewGroup.LayoutParams.MATCH_PARENT
                 playerView.layoutParams = params
                 fullscreen = true
+                playerView.onPause()
             }
         }
 
 
     }
+
 }

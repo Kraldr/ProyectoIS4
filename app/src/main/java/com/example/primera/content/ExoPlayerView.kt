@@ -1,4 +1,4 @@
-package com.example.primera
+package com.example.primera.content
 
 import android.content.Context
 import android.net.Uri

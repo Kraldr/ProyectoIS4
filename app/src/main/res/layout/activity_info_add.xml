@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".infoAdd">
+    tools:context=".menu.infoAdd">
 
 
     <LinearLayout
@@ -19,118 +19,143 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.078">
 
-        <EditText
-            android:id="@+id/txtEmail"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="-70dp"
             android:layout_marginRight="24dp"
-            android:autofillHints="Correo"
+            app:boxStrokeColor="#000"
             android:enabled="false"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_email"
-            android:drawableLeft="@drawable/ic_email"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Correo"
-            android:inputType="textEmailAddress"
-            android:padding="16dp" />
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconDrawable="@drawable/ic_email">
 
-        <EditText
-            android:id="@+id/txtCC"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Correo"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
+            app:boxStrokeColor="#000"
             android:enabled="false"
-            android:autofillHints="Nombres"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_baseline_featured_video_24"
-            android:drawableLeft="@drawable/ic_baseline_featured_video_24"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Identificación"
-            android:inputType="text"
-            android:maxLength="16"
-            android:padding="16dp" />
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconDrawable="@drawable/ic_baseline_featured_video_24">
 
-        <EditText
-            android:id="@+id/txtNombre"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtCC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Identificación"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
-            android:autofillHints="Nombres"
+            app:boxStrokeColor="#000"
             android:enabled="false"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_baseline_person_24black"
-            android:drawableLeft="@drawable/ic_baseline_person_24black"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Nombres"
-            android:inputType="text"
-            android:maxLength="16"
-            android:padding="16dp" />
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconDrawable="@drawable/ic_baseline_person_24black">
 
-        <EditText
-            android:id="@+id/txtApellido"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombres"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
-            android:autofillHints="Apellidos"
+            app:boxStrokeColor="#000"
             android:enabled="false"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_baseline_person_24black"
-            android:drawableLeft="@drawable/ic_baseline_person_24black"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Apellidos"
-            android:inputType="text"
-            android:maxLength="16"
-            android:padding="16dp" />
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconDrawable="@drawable/ic_baseline_person_24black">
 
-        <EditText
-            android:id="@+id/txtCel"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtApellido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Apellidos"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
-            android:autofillHints="Celular"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_baseline_smartphone_24"
-            android:drawableLeft="@drawable/ic_baseline_smartphone_24"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Celular"
+            app:boxStrokeColor="#000"
             android:enabled="false"
-            android:inputType="text"
-            android:maxLength="16"
-            android:padding="16dp" />
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconDrawable="@drawable/ic_baseline_smartphone_24">
 
-        <EditText
-            android:id="@+id/txtTypeAccount"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtCel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Celular"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
-            android:enabled="false"
             android:layout_marginRight="24dp"
-            android:autofillHints="Tipo de cuenta"
-            android:background="@drawable/ic_field"
-            android:drawableStart="@drawable/ic_baseline_category_24"
-            android:drawableLeft="@drawable/ic_baseline_category_24"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Tipo de cuenta"
-            android:inputType="text"
-            android:maxLength="16"
-            android:padding="16dp" />
+            app:boxStrokeColor="#000"
+            android:enabled="false"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconDrawable="@drawable/ic_baseline_category_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtTypeAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tipo de cuenta"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
 

@@ -1,10 +1,9 @@
-package com.example.primera
+package com.example.primera.menu
 
 import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,11 +11,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
-import androidx.core.app.NotificationCompat
-import androidx.recyclerview.widget.RecyclerView
-import com.example.primera.databinding.ActivityListadminBinding
-import com.example.primera.databinding.ActivityRegistrarseBinding
-import com.google.android.exoplayer2.offline.DownloadService.startForeground
+import com.example.primera.R
+import com.example.primera.content.contentClass
 import com.google.firebase.database.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -38,22 +34,7 @@ class listadmin : AppCompatActivity() {
         var btnCrearTipo = findViewById<Button>(R.id.btnCrearTipo)
         var btnRegistro = findViewById<Button>(R.id.btnRegistro)
 
-        val spinner = findViewById<Spinner>(R.id.spinner)
-        var type:String = ""
-
-        setupRecyclerView(spinner)
-
-
-        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                type = listTitle[p2]
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-        }
+        setupRecyclerView()
 
 
         btnCrearTipo.setOnClickListener {
@@ -64,27 +45,10 @@ class listadmin : AppCompatActivity() {
 
         btnRegistro.setOnClickListener {
             loadSesion()
-            saveData(type)
+            saveData()
         }
     }
 
-    private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name: CharSequence = "chaneltest"
-            val description = "sssss"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, name, importance)
-            channel.description = description
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            val notificationManager = getSystemService(
-                NotificationManager::class.java
-            )
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
@@ -138,18 +102,19 @@ class listadmin : AppCompatActivity() {
         dialog.setCanceledOnTouchOutside(false)
     }
 
-    private fun saveData (type: String) {
+    private fun saveData () {
         var txtTitle = findViewById<EditText>(R.id.txtTitle)
         var txtIMG = findViewById<EditText>(R.id.txtIMG)
         var txtDescrp = findViewById<EditText>(R.id.txtDescrips)
         var UID = UUID.randomUUID().toString()
+        val type = findViewById<AutoCompleteTextView>(R.id.typeArchive)
 
         var number = 1
 
         val database = FirebaseDatabase.getInstance().getReference("content")
         val databaseBool = FirebaseDatabase.getInstance().getReference("boolNotify")
-        val content = contentClass(UID, txtTitle.text.toString(), txtDescrp.text.toString(),type, txtIMG.text.toString())
-        val contentBool = boolNotify(number.toString(), true, type, txtTitle.text.toString())
+        val content = contentClass(UID, txtTitle.text.toString(), txtDescrp.text.toString(),type.text.toString(), txtIMG.text.toString())
+        val contentBool = boolNotify(number.toString(), true, type.text.toString(), txtTitle.text.toString())
         database.child(UID).setValue(content).addOnSuccessListener {
             Toast.makeText(this, "Contenido agregado correctamente", Toast.LENGTH_LONG).show()
             databaseBool.child(number.toString()).setValue(contentBool).addOnSuccessListener {
@@ -160,7 +125,7 @@ class listadmin : AppCompatActivity() {
 
     }
 
-    private fun setupRecyclerView(spinner: Spinner) {
+    private fun setupRecyclerView() {
         dbref = FirebaseDatabase.getInstance().getReference("ArchiType")
         dbref.addValueEventListener(object : ValueEventListener {
 
@@ -174,12 +139,12 @@ class listadmin : AppCompatActivity() {
                         if (card != null) {
                             listCard.add(card)
                             listTitle.clear()
-                            listTitle.add("Seleccione una opción")
                             for (i in listCard) {
                                 listTitle.add(i.title)
                             }
-                            val adaptador = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, listTitle)
-                            spinner.adapter = adaptador
+                            val adapters = ArrayAdapter(applicationContext, R.layout.list_item, listTitle)
+                            val text = findViewById<AutoCompleteTextView>(R.id.typeArchive)
+                            text.setAdapter(adapters)
                         }
                     }
 

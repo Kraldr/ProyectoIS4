@@ -1,4 +1,4 @@
-package com.example.primera
+package com.example.primera.content
 
 data class contentClass(
     val id:String = "",

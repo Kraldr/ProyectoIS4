@@ -1,4 +1,4 @@
-package com.example.primera
+package com.example.primera.menu
 
 data class boolNotify(
     val key: String = "",
