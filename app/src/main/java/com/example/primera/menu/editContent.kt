@@ -28,7 +28,7 @@ class editContent : AppCompatActivity() {
         meesage = intent.getStringExtra("key").toString()
 
 
-        var typex:String = ""
+        var typeArchive = findViewById<EditText>(R.id.typeArchive)
 
         setupRecyclerView()
         setupContent()
@@ -37,8 +37,8 @@ class editContent : AppCompatActivity() {
 
         btnActualizar.setOnClickListener {
             loadSesion()
-            if (typex != "" && typex != type) {
-                saveData(typex)
+            if (typeArchive.text.toString() != "" && typeArchive.text.toString() != type) {
+                saveData(typeArchive.text.toString())
             }else {
                 saveData(type)
             }
@@ -86,7 +86,6 @@ class editContent : AppCompatActivity() {
                             list.add(content)
                         }
                     }
-
                     datos(list)
 
                 }

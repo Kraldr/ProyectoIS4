@@ -56,7 +56,6 @@ class menuList : AppCompatActivity() {
         supportActionBar!!.elevation = 0F;
         toolbar.setBackgroundColor(Color.parseColor("#ffffff"))
 
-        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
 
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPreference", Context.MODE_PRIVATE)
         saveEmail = sharedPreferences.getString("correo", null).toString()
